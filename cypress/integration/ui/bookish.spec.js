@@ -1,4 +1,28 @@
-//import {cy} from
+import axios from 'axios';
+before(() => {
+    return axios
+        .delete('http://localhost:8080/books?_cleanup=true')
+        .catch((err) => err);
+});
+
+afterEach(() => {
+    return axios
+        .delete('http://localhost:8080/books?_cleanup=true')
+        .catch(err => err)
+})
+
+beforeEach(() => {
+    const books = [
+        {'name': 'Refactoring', 'id': 1},
+        {'name': 'Domain-driven design', 'id': 2}
+    ]
+
+    return books.map(item =>
+        axios.post('http://localhost:8080/books', item,
+            {headers: {'Content-Type': 'application/json'}}
+        )
+    )
+})
 describe('Bookish application', function () {
     it('Visits the bookish', function () {
         cy.visit('http://localhost:3000/');

@@ -1,5 +1,4 @@
-export {renderBooks}
-const renderBooks = (books) => {
+const BookList = ({books}) => {
     return <div data-test='book-list'>
         {books.map(book => renderBook(book))
         }
@@ -7,7 +6,9 @@ const renderBooks = (books) => {
 }
 
 const renderBook = (book) => {
-    return <div className='book-item' key={book.name}>
+    return <div className='book-item' key={book.id}>
         <h2>{book.name}</h2>
     </div>
 }
+
+export {BookList}
